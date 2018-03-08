@@ -19,6 +19,8 @@ public class DetailActivity extends AppCompatActivity {
 
     // Store the binding
     private ActivityDetailBinding binding;
+
+    // Declare an instance of Sandwich
     private Sandwich sandwich;
 
     @Override
