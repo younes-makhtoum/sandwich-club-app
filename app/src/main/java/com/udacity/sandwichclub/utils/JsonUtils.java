@@ -46,9 +46,7 @@ public class JsonUtils {
                 // Extract the JSONArray associated with the key called "alsoKnownAs",
                 // which represents a list of alternative known names for the sandwich.
                 JSONArray alsoKnownAsArray = nameInfo.getJSONArray(ALSO_KNOWN_AS);
-                for (int j = 0; j < alsoKnownAsArray.length(); j++) {
-                    alsoKnownAs.add(alsoKnownAsArray.optString(j));
-                }
+                alsoKnownAs = ArrayListConverter(alsoKnownAsArray);
             }
 
             if (clickedSandwich.has(PLACE_OF_ORIGIN)) {
@@ -70,9 +68,7 @@ public class JsonUtils {
                 // Extract the JSONArray associated with the key called "ingredients",
                 // which represents a list of ingredients of the sandwich.
                 JSONArray ingredientsArray = clickedSandwich.getJSONArray(INGREDIENTS);
-                for (int j = 0; j < ingredientsArray.length(); j++) {
-                    ingredients.add(ingredientsArray.optString(j));
-                }
+                ingredients = ArrayListConverter(ingredientsArray);
             }
 
         } catch (JSONException e) {
@@ -84,5 +80,13 @@ public class JsonUtils {
 
         // Return the sandwich with its related info :
         return new Sandwich(mainName, alsoKnownAs, placeOfOrigin, description, imageURL, ingredients);
+    }
+
+    private static ArrayList<String> ArrayListConverter (JSONArray jsonArray) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int j = 0; j < jsonArray.length(); j++) {
+            arrayList.add(jsonArray.optString(j));
+        }
+        return arrayList;
     }
 }
