@@ -11,6 +11,14 @@ import java.util.ArrayList;
 
 public class JsonUtils {
 
+    private static final String NAME = "name";
+    private static final String MAIN_NAME = "mainName";
+    private static final String ALSO_KNOWN_AS = "alsoKnownAs";
+    private static final String PLACE_OF_ORIGIN = "placeOfOrigin";
+    private static final String DESCRIPTION = "description";
+    private static final String IMAGE = "image";
+    private static final String INGREDIENTS = "ingredients";
+
     public static Sandwich parseSandwichJson(String json) {
 
         String mainName = "";
@@ -27,41 +35,41 @@ public class JsonUtils {
             // Create a JSONObject from the JSON response string
             JSONObject clickedSandwich = new JSONObject(json);
 
-            if (clickedSandwich.has("name")) {
+            if (clickedSandwich.has(NAME)) {
                 // For a given sandwich, extract the JSONObject associated with the
                 // key called "name", which contains name information about the sandwich
-                JSONObject nameInfo = clickedSandwich.getJSONObject("name");
+                JSONObject nameInfo = clickedSandwich.getJSONObject(NAME);
 
                 // Extract the value for the key called "mainName"
-                mainName = nameInfo.optString("mainName");
+                mainName = nameInfo.optString(MAIN_NAME);
 
                 // Extract the JSONArray associated with the key called "alsoKnownAs",
                 // which represents a list of alternative known names for the sandwich.
-                JSONArray alsoKnownAsArray = nameInfo.getJSONArray("alsoKnownAs");
+                JSONArray alsoKnownAsArray = nameInfo.getJSONArray(ALSO_KNOWN_AS);
                 for (int j = 0; j < alsoKnownAsArray.length(); j++) {
                     alsoKnownAs.add(alsoKnownAsArray.optString(j));
                 }
             }
 
-            if (clickedSandwich.has("placeOfOrigin")) {
+            if (clickedSandwich.has(PLACE_OF_ORIGIN)) {
                 // Extract the value for the key called "mainName"
-                placeOfOrigin = clickedSandwich.optString("placeOfOrigin");
+                placeOfOrigin = clickedSandwich.optString(PLACE_OF_ORIGIN);
             }
 
-            if (clickedSandwich.has("description")) {
+            if (clickedSandwich.has(DESCRIPTION)) {
                 // Extract the value for the key called "mainName"
-                description = clickedSandwich.optString("description");
+                description = clickedSandwich.optString(DESCRIPTION);
             }
 
-            if (clickedSandwich.has("image")) {
+            if (clickedSandwich.has(IMAGE)) {
                 // Extract the value for the key called "mainName"
-                imageURL = clickedSandwich.optString("image");
+                imageURL = clickedSandwich.optString(IMAGE);
             }
 
-            if (clickedSandwich.has("ingredients")) {
+            if (clickedSandwich.has(INGREDIENTS)) {
                 // Extract the JSONArray associated with the key called "ingredients",
                 // which represents a list of ingredients of the sandwich.
-                JSONArray ingredientsArray = clickedSandwich.getJSONArray("ingredients");
+                JSONArray ingredientsArray = clickedSandwich.getJSONArray(INGREDIENTS);
                 for (int j = 0; j < ingredientsArray.length(); j++) {
                     ingredients.add(ingredientsArray.optString(j));
                 }
